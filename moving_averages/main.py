@@ -3,12 +3,8 @@ import pandas as pd
 import numpy as np
 import requests
 import matplotlib.pyplot as plt
-from math import floor
-from termcolor import colored as cl
-from datetime import datetime, timedelta, date
 import yfinance as yf
 from matplotlib.dates import MonthLocator, DateFormatter, YearLocator
-import plotly.graph_objects as go
 
 
 class StockAnalyzer:
@@ -39,14 +35,24 @@ class StockAnalyzer:
     #     except Exception as e:
     #         return pd.DataFrame.empty
 
-    def get_historical_yf(self, start, interval="1d"):
+    def get_historical_yf(self, start, end=None, interval="1d"):
         return yf.download(
-            tickers=self.stock, interval=interval, start=start, progress=False
+            tickers=self.stock,
+            interval=interval,
+            start=start,
+            end=end,
+            progress=False,
         )
 
-    def plot_moving_averages(self, start_date, sma_period, lma_period):
+    def plot_moving_averages(
+        self,
+        start_date,
+        sma_period,
+        lma_period,
+        end_date=None,
+    ):
         # df = self.get_historical_data(self.stock, start_date, period)
-        df = self.get_historical_yf(start_date)
+        df = self.get_historical_yf(start=start_date, end=end_date)
         # 20 days to represent the 22 trading days in a month
         df["Close"] = df["Adj Close"]
         df["SMA"] = df["Close"].rolling(sma_period).mean()
