@@ -115,7 +115,7 @@ class StockAnalyzer:
 
 
 if __name__ == "__main__":
-    ...
+    df = StockAnalyzer("AAPL").get_historical_yf()
     # api_key = "91b69afa6c474612a50e9e707efdd54b"
     # api_url = f"https://api.twelvedata.com/stocks?apikey={api_key}"
     # stocks = requests.get(api_url).json()["data"]
