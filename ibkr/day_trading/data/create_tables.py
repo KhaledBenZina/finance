@@ -20,7 +20,7 @@ def create_table_for_tickers(tickers):
 
         create_table_sql = f"""
         CREATE TABLE IF NOT EXISTS {table_name.upper()} (
-            DateTime TIMESTAMP PRIMARY KEY,
+            DateTime TIMESTAMP WITHOUT TIMEZONE PRIMARY KEY,
             Open FLOAT,
             High FLOAT,
             Low FLOAT,

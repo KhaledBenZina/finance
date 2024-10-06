@@ -2,30 +2,42 @@ import yfinance as yf
 import pandas as pd
 from sqlalchemy import create_engine
 from datetime import datetime, timedelta
+import pytz
 
 # PostgreSQL database connection parameters
 DATABASE_URI = "postgresql+psycopg2://khaled:Arsenal4th-@localhost:5432/stockdata"
 
 # Create SQLAlchemy engine
 engine = create_engine(DATABASE_URI)
+new_york_tz = pytz.timezone("America/New_York")
 
 
 def fetch_and_store_data(tickers):
     """Fetches live 1-minute data for a list of tickers and stores it in the PostgreSQL database."""
 
     for ticker in tickers:
-        table_name = f"stock_data_{ticker.replace('.', '_')}"
+        table_name = f"{ticker.replace('.', '_')}"
 
+        # Get current time in New York
         now = datetime.now()
-        start_time = now - timedelta(days=1)  # Adjust this range as needed
-        end_time = now
+
+        # Calculate yesterday's date
+        yesterday = now - timedelta(days=1)
+
+        # Set the market open and close times
+        market_open_time = datetime(
+            yesterday.year, yesterday.month, yesterday.day, 9, 30
+        )
+        market_close_time = datetime(
+            yesterday.year, yesterday.month, yesterday.day, 16, 0
+        )
 
         try:
             # Fetch live data
             df = yf.download(
                 ticker,
-                start=start_time.strftime("%Y-%M-%d"),
-                end=end_time,
+                start=market_open_time,
+                end=market_close_time,
                 interval="1m",
             )
 
