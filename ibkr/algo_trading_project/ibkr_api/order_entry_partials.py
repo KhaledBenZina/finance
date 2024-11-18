@@ -4,6 +4,8 @@ import logging
 
 # Connect to TWS API
 ib = IB()
+# Disconnect from API
+ib.disconnect()
 ib.connect("127.0.0.1", 7497, clientId=1)
 
 
@@ -85,13 +87,13 @@ def manage_trade(entry_price, trade, stop_loss_order, direction):
             )
         ):
             logging.info("First partial take profit target hit.")
-            # Take partial of 30 shares
+            # Take partial of 33 shares
             partial_action = "SELL" if direction == "long" else "BUY"
-            partial_order1 = MarketOrder(partial_action, 30)
+            partial_order1 = MarketOrder(partial_action, 33)
             ib.placeOrder(stock, partial_order1)
             ib.cancelOrder(stop_loss_order)  # Remove initial stop
             logging.info(
-                "Partial order of 30 shares placed and initial stop loss canceled."
+                "Partial order of 33 shares placed and initial stop loss canceled."
             )
 
             # Adjust stop to break-even
@@ -100,11 +102,11 @@ def manage_trade(entry_price, trade, stop_loss_order, direction):
             break_even_stop = StopOrder(stop_action, 70, new_stop_price)
             ib.placeOrder(stock, break_even_stop)
             logging.info(f"Break-even stop loss order placed at {new_stop_price}")
-            remaining_shares -= 30
+            remaining_shares -= 33
             first_partial = True  # Ensure first partial is only taken once
 
         # Second partial take profit
-        if remaining_shares == 70 and (
+        if remaining_shares == 67 and (
             (
                 current_price >= partial2_target
                 if direction == "long"
@@ -112,23 +114,23 @@ def manage_trade(entry_price, trade, stop_loss_order, direction):
             )
         ):
             logging.info("Second partial take profit target hit.")
-            # Take another partial of 30 shares
-            partial_order2 = MarketOrder(partial_action, 30)
+            # Take another partial of 33 shares
+            partial_order2 = MarketOrder(partial_action, 33)
             ib.placeOrder(stock, partial_order2)
             ib.cancelOrder(break_even_stop)  # Remove break-even stop
             logging.info(
-                "Partial order of 30 shares placed and break-even stop loss canceled."
+                "Partial order of 33 shares placed and break-even stop loss canceled."
             )
 
-            # Set trailing stop for remaining 40 shares
+            # Set trailing stop for remaining 34 shares
             trail_amount = 0.5
             trailing_action = "SELL" if direction == "long" else "BUY"
             trailing_stop_order = create_trailing_stop_order(
-                trailing_action, 40, trail_amount
+                trailing_action, 34, trail_amount
             )
             ib.placeOrder(stock, trailing_stop_order)
             logging.info("Trailing stop order placed for remaining 40 shares.")
-            remaining_shares -= 30
+            remaining_shares -= 34
 
         # Stop loss triggered
         if (current_price <= entry_price - 0.5 and direction == "long") or (
@@ -141,7 +143,7 @@ def manage_trade(entry_price, trade, stop_loss_order, direction):
 
 
 # Main execution
-direction = "short"  # Change to 'long' or 'short' based on the desired trade
+direction = "long"  # Change to 'long' or 'short' based on the desired trade
 # Define contract for the stock (e.g., NVDA)
 stock = Stock("NVDA", "SMART", "USD")
 trade, entry_price, stop = enter_trade(stock, direction)
