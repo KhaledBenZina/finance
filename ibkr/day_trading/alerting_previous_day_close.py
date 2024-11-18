@@ -6,14 +6,22 @@ import os
 
 def send_notification(stock, current_price, prev_close):
     title = "Stock Alert"
-    message = f"Stock {stock} is trading near the previous close price: {current_price} (Previous Close: {prev_close})"
-    os.system(f'notify-send "{title}" "{message}"')
+    message = f"Stock {stock} is trading near the previous close price or VWAP: {current_price} (Previous Close: {prev_close})"
+    # os.system(f'notify-send "{title}" "{message}"')
+    from plyer import notification
+
+    notification.notify(
+        title=title,
+        message=message,
+        app_name="App Name",
+        timeout=5,  # Duration in seconds
+    )
 
 
 def check_stock_price(stock):
     try:
         stock_info = yf.Ticker(stock)
-        data = stock_info.history(period="2d")
+        data = stock_info.history(period="1d")
         if len(data) < 2:
             return  # Not enough data to compare
 
@@ -26,11 +34,24 @@ def check_stock_price(stock):
 
         current_price = live_data["Close"].iloc[-1]
 
-        # Check if current price is within +/- $0.5 of previous close
+        # Check if current price is within +/- 1% of previous close
         if abs(current_price - prev_close) / prev_close <= 0.01:
             send_notification(stock, current_price, prev_close)
         else:
             print(f"{stock} is not near PDC")
+
+        # Calculate VWAP
+        live_data["VWAP"] = (
+            live_data["Close"] * live_data["Volume"]
+        ).cumsum() / live_data["Volume"].cumsum()
+        vwap = live_data["VWAP"].iloc[-1]
+
+        # Check if current price is within +/- 1% of VWAP
+        if abs(current_price - vwap) / vwap <= 0.01:
+            send_notification(stock, current_price, vwap)
+        else:
+            print(f"{stock} is not near VWAP")
+
     except Exception as e:
         print(f"Error checking stock {stock}: {e}")
 
@@ -44,15 +65,15 @@ def main(stocks):
 
 
 if __name__ == "__main__":
+    send_notification("AAPL", 150.0, 150.0)  # Test notification
     stocks = [
         "AAPL",  # Apple Inc.
         "MSFT",  # Microsoft Corporation
         "AMZN",  # Amazon.com Inc.
         "GOOGL",  # Alphabet Inc. (Class A)
         "GOOG",  # Alphabet Inc. (Class C)
-        "FB",  # Meta Platforms Inc.
+        "META",  # Meta Platforms Inc.
         "TSLA",  # Tesla Inc.
-        "BRK.B",  # Berkshire Hathaway Inc. (Class B)
         "NVDA",  # NVIDIA Corporation
         "JPM",  # JPMorgan Chase & Co.
         "JNJ",  # Johnson & Johnson
