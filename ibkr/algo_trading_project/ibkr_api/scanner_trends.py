@@ -60,7 +60,6 @@ if __name__ == "__main__":
         "GOOG",
         "FB",
         "TSLA",
-        "BRK.B",
         "NVDA",
         "JPM",
         "JNJ",
