@@ -178,7 +178,7 @@ def manage_trade(
 
 
 # Execution
-direction = "short"
+direction = "long"
 share_size = 100
 stock = Stock("NVDA", "SMART", "USD")
 

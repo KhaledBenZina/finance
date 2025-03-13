@@ -6,7 +6,8 @@ import math
 # Connect to TWS API
 ib = IB()
 # Disconnect from API
-ib.disconnect()
+# if ib.isConnected():
+#     ib.disconnect()
 ib.connect("127.0.0.1", 7497, clientId=1)
 
 # Configure logging
@@ -159,6 +160,7 @@ share_size = 100  # Define the initial share size
 stock = Stock("NVDA", "SMART", "USD")
 trade, entry_price, stop = enter_trade(stock, direction, share_size)
 manage_trade(entry_price, trade, stop, direction, share_size)
+
 
 # Disconnect from API
 ib.disconnect()
