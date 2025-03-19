@@ -11,6 +11,7 @@ function App() {
     const [errorMessage, setErrorMessage] = useState("");
 
     const ws = useRef(null);
+    const timerRef = useRef(null); // Reference to store the timer ID
 
     // Initialize WebSocket connection
     useEffect(() => {
@@ -66,6 +67,10 @@ function App() {
             if (ws.current) {
                 ws.current.close();
             }
+            // Clear any existing timer on unmount
+            if (timerRef.current) {
+                clearInterval(timerRef.current);
+            }
         };
     }, []); // Empty dependency array means this effect runs once on mount
 
@@ -73,7 +78,26 @@ function App() {
     useEffect(() => {
         if (ws.current && ws.current.readyState === WebSocket.OPEN) {
             requestMarketData(symbol);
+
+            // Clear any existing timer when symbol changes
+            if (timerRef.current) {
+                clearInterval(timerRef.current);
+            }
+
+            // Set up new timer for auto-refresh of the current symbol
+            timerRef.current = setInterval(() => {
+                if (ws.current && ws.current.readyState === WebSocket.OPEN) {
+                    requestMarketData(symbol);
+                }
+            }, 5000); // Update every 5 seconds (adjust as needed)
         }
+
+        // Cleanup timer when symbol changes
+        return () => {
+            if (timerRef.current) {
+                clearInterval(timerRef.current);
+            }
+        };
     }, [symbol]);
 
     // Function to request market data

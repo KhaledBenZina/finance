@@ -2,13 +2,13 @@ from ib_insync import IB, Stock, util
 import time
 
 
-def fetch_and_store_data(ticker, duration="1 M", bar_size="1 min"):
+def fetch_and_store_data(ticker, duration="2 M", bar_size="1 min"):
     contract = Stock(ticker, "SMART", "USD")
 
     # Request historical data
     bars = ib.reqHistoricalData(
         contract,
-        endDateTime="20241025 00:00:00",
+        endDateTime="20241225 00:00:00",
         durationStr=duration,
         barSizeSetting=bar_size,
         whatToShow="TRADES",
@@ -102,8 +102,10 @@ if __name__ == "__main__":
         "SNAP",
         "XOM",
         "PFE",
-        "KO",
         "INTC",
+        "RGTI",
+        "QUBT",
+        "QBTS",
     ]
     # Connect to IBKR
     ib = IB()
