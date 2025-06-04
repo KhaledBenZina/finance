@@ -8,7 +8,7 @@ def fetch_and_store_data(ticker, duration="2 M", bar_size="1 min"):
     # Request historical data
     bars = ib.reqHistoricalData(
         contract,
-        endDateTime="20241225 00:00:00",
+        endDateTime="20250222 00:00:00",
         durationStr=duration,
         barSizeSetting=bar_size,
         whatToShow="TRADES",

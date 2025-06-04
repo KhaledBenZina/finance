@@ -1,6 +1,6 @@
 /* App.css */
 .container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -49,6 +49,14 @@ label {
   font-size: 16px;
 }
 
+.strategy-params {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  border-left: 4px solid #6c757d;
+}
+
 .button-group {
   display: flex;
   gap: 10px;
@@ -64,12 +72,17 @@ label {
   transition: background-color 0.2s;
 }
 
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .btn-success {
   background-color: #28a745;
   color: white;
 }
 
-.btn-success:hover {
+.btn-success:hover:not(:disabled) {
   background-color: #218838;
 }
 
@@ -78,7 +91,7 @@ label {
   color: white;
 }
 
-.btn-danger:hover {
+.btn-danger:hover:not(:disabled) {
   background-color: #c82333;
 }
 
@@ -87,7 +100,7 @@ label {
   color: white;
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover:not(:disabled) {
   background-color: #5a6268;
 }
 
@@ -95,7 +108,7 @@ label {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .market-price h3 {
@@ -105,6 +118,7 @@ label {
 .price {
   font-weight: bold;
   margin-left: 8px;
+  font-size: 1.2em;
 }
 
 .trade-status {
@@ -141,7 +155,9 @@ label {
   color: #dc3545;
 }
 
-.no-positions {
+.no-positions,
+.no-data,
+.no-updates {
   text-align: center;
   color: #6c757d;
   padding: 20px;
@@ -180,4 +196,305 @@ label {
 .error-message {
   color: #dc3545;
   font-weight: 500;
+}
+
+/* 3R Strategy specific styles */
+.strategy-info {
+  margin-bottom: 20px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.info-item {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-label {
+  font-size: 0.8em;
+  color: #6c757d;
+}
+
+.info-value {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.trade-progress {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.progress-bar-container {
+  position: relative;
+  margin-top: 30px;
+}
+
+.price-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 0.8em;
+  color: #6c757d;
+}
+
+.progress-bar {
+  position: relative;
+  height: 8px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+.progress-marker {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  top: -2px;
+  transform: translateX(-50%);
+}
+
+.progress-marker.stop {
+  background-color: #dc3545;
+}
+
+.progress-marker.entry {
+  background-color: #6c757d;
+}
+
+.progress-marker.target1 {
+  background-color: #ffc107;
+}
+
+.progress-marker.target2 {
+  background-color: #28a745;
+}
+
+.progress-marker.current {
+  background-color: #007bff;
+  width: 16px;
+  height: 16px;
+  top: -4px;
+  z-index: 10;
+}
+
+.progress-marker.current span {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #007bff;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  white-space: nowrap;
+}
+
+.updates-container {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 15px;
+}
+
+.updates-list {
+  padding: 10px;
+}
+
+.update-item {
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  border-left: 4px solid #6c757d;
+  background-color: #f8f9fa;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "time status"
+    "message message";
+  gap: 4px;
+}
+
+.update-item.calculating-risk {
+  border-left-color: #17a2b8;
+}
+
+.update-item.entering-trade,
+.update-item.trade-entered {
+  border-left-color: #007bff;
+}
+
+.update-item.stop-loss-placed,
+.update-item.stop-moved {
+  border-left-color: #dc3545;
+}
+
+.update-item.targets-set {
+  border-left-color: #28a745;
+}
+
+.update-item.target-1-hit,
+.update-item.target-2-hit {
+  border-left-color: #ffc107;
+  background-color: #fff3cd;
+}
+
+.update-item.partial-exit {
+  border-left-color: #28a745;
+  background-color: #d4edda;
+}
+
+.update-item.trailing-stop {
+  border-left-color: #6f42c1;
+}
+
+.update-item.closed {
+  border-left-color: #20c997;
+  background-color: #d1f2eb;
+}
+
+.update-time {
+  grid-area: time;
+  font-size: 0.8em;
+  color: #6c757d;
+}
+
+.update-status {
+  grid-area: status;
+  font-weight: bold;
+  text-align: right;
+}
+
+.update-message {
+  grid-area: message;
+  margin-top: 4px;
+}
+
+/* Alerting component specific styles */
+.watchlist-section {
+  margin-bottom: 20px;
+}
+
+.watchlist-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  align-items: flex-end;
+}
+
+.watchlist-controls .form-group {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.watchlist-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.watchlist-table th,
+.watchlist-table td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.watchlist-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.watchlist-table td:nth-child(2) {
+  text-align: left;
+  font-weight: 500;
+}
+
+.alerts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.alerts-container {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.alerts-list {
+  padding: 10px;
+}
+
+.alert-item {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #f8f9fa;
+  border-left: 4px solid #6c757d;
+}
+
+.alert-item.price {
+  border-left-color: #007bff;
+  background-color: #e7f5ff;
+}
+
+.alert-item.vwap {
+  border-left-color: #6f42c1;
+  background-color: #f3e9ff;
+}
+
+.alert-item.prevClose {
+  border-left-color: #28a745;
+  background-color: #e8f5e9;
+}
+
+.alert-item.volume {
+  border-left-color: #fd7e14;
+  background-color: #fff3e0;
+}
+
+.alert-item.warning {
+  border-left-color: #ffc107;
+  background-color: #fff9e6;
+}
+
+.alert-item.info {
+  border-left-color: #17a2b8;
+  background-color: #e3f2fd;
+}
+
+.alert-time {
+  font-size: 0.8em;
+  color: #6c757d;
+  flex-shrink: 0;
+  margin-right: 10px;
+}
+
+.alert-message {
+  flex-grow: 1;
+}
+
+.no-alerts {
+  text-align: center;
+  color: #6c757d;
+  padding: 20px;
 }

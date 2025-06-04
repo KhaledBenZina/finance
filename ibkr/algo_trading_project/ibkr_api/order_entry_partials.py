@@ -81,7 +81,7 @@ def manage_trade(entry_price, trade, stop_loss_order, direction, share_size):
 
         # Get latest price
         market_data = ib.reqMktData(stock)
-        ib.sleep(1)  # Short delay for price polling
+        ib.sleep(0.1)  # Short delay for price polling
         current_price = market_data.last
         logging.info(f"Current price: {current_price}")
 
@@ -132,7 +132,7 @@ def manage_trade(entry_price, trade, stop_loss_order, direction, share_size):
             )
 
             # Set trailing stop for remaining shares
-            trail_amount = 0.5
+            trail_amount = R
             trailing_action = "SELL" if direction == "long" else "BUY"
             trailing_stop_order = create_trailing_stop_order(
                 trailing_action, remaining_shares - partial_size, trail_amount
@@ -149,7 +149,9 @@ def manage_trade(entry_price, trade, stop_loss_order, direction, share_size):
         ):
             logging.info("Stop loss triggered.")
             break
-
+        if remaining_shares == 0:
+            logging.info("All shares have been sold.")
+            break
         ib.sleep(1)
 
 
