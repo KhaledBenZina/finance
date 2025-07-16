@@ -641,7 +641,7 @@ if __name__ == "__main__":
         direction = "long"  # Change to 'long' or 'short' based on the desired trade
         share_size = 100  # Define the initial share size
         # Define contract for the stock (e.g., NVDA)
-        stock = Stock("PLTR", "SMART", "USD")
+        stock = Stock("AMD", "SMART", "USD")
 
         # Make sure we're connected
         if not ib.isConnected():
