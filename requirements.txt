@@ -1,6 +1,7 @@
 aiohttp==3.8.4
 aiosignal==1.3.1
 alpha-vantage==2.3.1
+altair==4.2.2
 annotated-types==0.7.0
 ansi2html @ file:///home/conda/feedstock_root/build_artifacts/ansi2html_1695769027351/work
 anyio==4.0.0
@@ -15,8 +16,10 @@ async-timeout==4.0.2
 attrs==23.1.0
 Babel==2.12.1
 backcall @ file:///home/conda/feedstock_root/build_artifacts/backcall_1592338393461/work
+backoff==2.2.1
 backports.functools-lru-cache @ file:///home/conda/feedstock_root/build_artifacts/backports.functools_lru_cache_1618230623929/work
 beautifulsoup4==4.12.2
+bidict==0.23.1
 bleach==6.0.0
 blinker @ file:///home/conda/feedstock_root/build_artifacts/blinker_1681349778161/work
 Brotli @ file:///home/conda/feedstock_root/build_artifacts/brotli-split_1695989787169/work
@@ -40,6 +43,7 @@ dash-core-components==2.0.0
 dash-html-components==2.0.0
 dash-table==5.0.0
 DateTime==5.2
+dbu==0.0.2
 debugpy @ file:///home/conda/feedstock_root/build_artifacts/debugpy_1680755454898/work
 decorator @ file:///home/conda/feedstock_root/build_artifacts/decorator_1641555617451/work
 defusedxml==0.7.1
@@ -47,6 +51,7 @@ distro==1.9.0
 ecos==2.0.12
 empyrial==2.1.3
 empyrical==0.5.5
+entrypoints==0.4
 evdev==1.6.1
 eventkit==1.0.1
 exceptiongroup==1.1.3
@@ -55,6 +60,8 @@ fake-useragent==1.1.3
 fastjsonschema==2.18.0
 feedparser==6.0.10
 Flask==2.2.5
+flask-cors==5.0.1
+Flask-SocketIO==5.5.1
 fonttools==4.39.4
 fpdf==1.7.2
 fqdn==1.5.1
@@ -65,6 +72,7 @@ google-api-core==2.12.0
 google-auth==2.23.3
 google-generativeai==0.2.1
 googleapis-common-protos==1.60.0
+great_expectations==1.6.2
 greenlet==3.0.3
 grpcio==1.59.0
 grpcio-status==1.59.0
@@ -73,6 +81,7 @@ html5lib==1.1
 httpcore==1.0.5
 httpx==0.27.2
 ib-insync==0.9.86
+ibapi==9.81.1.post1
 idna @ file:///home/conda/feedstock_root/build_artifacts/idna_1663625384323/work
 importlib-metadata @ file:///home/conda/feedstock_root/build_artifacts/importlib-metadata_1682176699712/work
 ipykernel @ file:///home/conda/feedstock_root/build_artifacts/ipykernel_1683553336538/work
@@ -106,6 +115,7 @@ kiwisolver==1.4.4
 lxml==4.9.2
 make==0.1.6.post2
 MarkupSafe @ file:///home/conda/feedstock_root/build_artifacts/markupsafe_1695367421802/work
+marshmallow==3.26.1
 matplotlib==3.7.1
 matplotlib-inline @ file:///home/conda/feedstock_root/build_artifacts/matplotlib-inline_1660814786464/work
 mistune==3.0.1
@@ -138,6 +148,8 @@ pickleshare @ file:///home/conda/feedstock_root/build_artifacts/pickleshare_1602
 Pillow==9.5.0
 platformdirs @ file:///home/conda/feedstock_root/build_artifacts/platformdirs_1683850015520/work
 plotly @ file:///home/conda/feedstock_root/build_artifacts/plotly_1694802097009/work
+plyer==2.1.0
+posthog==6.7.5
 prometheus-client==0.17.1
 prompt-toolkit @ file:///home/conda/feedstock_root/build_artifacts/prompt-toolkit_1677600924538/work
 proto-plus==1.22.3
@@ -156,6 +168,7 @@ pydantic_core==2.23.3
 pyee==8.2.2
 pyfolio==0.9.2
 Pygments @ file:///home/conda/feedstock_root/build_artifacts/pygments_1681904169130/work
+pyler==0.2.0
 pynput==1.7.6
 pyparsing==3.0.9
 pyportfolioopt==1.5.5
@@ -168,7 +181,9 @@ PyQtWebEngine-Qt5==5.15.2
 pyquery==2.0.0
 PySocks @ file:///home/conda/feedstock_root/build_artifacts/pysocks_1661604839144/work
 python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/python-dateutil_1626286286081/work
+python-engineio==4.11.2
 python-json-logger==2.0.7
+python-socketio==5.12.1
 python-xlib==0.33
 pytz==2023.3
 PyYAML==6.0.1
@@ -187,6 +202,8 @@ rfc3339-validator==0.1.4
 rfc3986-validator==0.1.1
 rpds-py==0.10.3
 rsa==4.9
+ruamel.yaml==0.18.15
+ruamel.yaml.clib==0.2.12
 scikit-learn==1.3.0
 scipy==1.11.2
 scs==3.2.3
@@ -194,6 +211,7 @@ seaborn==0.12.2
 selenium==4.12.0
 Send2Trash==1.8.2
 sgmllib3k==1.0.0
+simple-websocket==1.1.0
 six @ file:///home/conda/feedstock_root/build_artifacts/six_1620240208055/work
 sniffio==1.3.0
 sortedcontainers==2.4.0
@@ -209,6 +227,7 @@ terminado==0.17.1
 threadpoolctl==3.2.0
 tiingo==0.14.0
 tinycss2==1.2.1
+toolz==1.0.0
 tornado @ file:///home/conda/feedstock_root/build_artifacts/tornado_1681817468880/work
 tqdm==4.65.0
 traitlets @ file:///home/conda/feedstock_root/build_artifacts/traitlets_1675110562325/work
@@ -216,6 +235,7 @@ trio==0.22.2
 trio-websocket==0.10.4
 typing_extensions==4.12.2
 tzdata==2023.3
+tzlocal==5.3.1
 uri-template==1.3.0
 urllib3 @ file:///home/conda/feedstock_root/build_artifacts/urllib3_1696434355823/work
 vaderSentiment==3.3.2
