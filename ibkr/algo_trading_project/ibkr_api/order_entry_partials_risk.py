@@ -9,7 +9,7 @@ import logging
 # --- CONFIGURABLE PARAMETERS ---
 ACCOUNT_AMOUNT = 10000  # Default account size in USD
 TRADE_RISK_PCT = 0.01  # % of account to risk per trade (e.g. 0.01 = 1%)
-PRICE_RISK_PCT = 0.0005  # % of price for stop (e.g. 0.005 = 0.5%)
+PRICE_RISK_PCT = 0.003  # % of price for stop (e.g. 0.005 = 0.5%)
 MAX_RISK_PCT = 0.01  # Max % of account to risk (e.g. 0.01 = 1%)
 
 # --- IBKR CONNECTION ---
@@ -229,4 +229,4 @@ def run_strategy(symbol, direction="long"):
 
 if __name__ == "__main__":
     logging.info("Script started as main.")
-    run_strategy("NVDA", direction="short")
+    run_strategy("AMD", direction="long")
