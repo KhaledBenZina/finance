@@ -2,6 +2,53 @@ from ib_insync import IB, Stock, util
 import time
 
 
+# Exposed tickers list for reuse by other modules
+TICKERS = [
+    # ETFs (benchmarks, huge liquidity)
+    "SPY",
+    "QQQ",
+    "IWM",
+    # Mega-cap tech
+    "AAPL",
+    "MSFT",
+    "AMZN",
+    "GOOGL",
+    "TSLA",
+    "NVDA",
+    "AMD",
+    "META",
+    # Financials
+    "JPM",
+    "BAC",
+    "GS",
+    # Energy
+    "XOM",
+    "CVX",
+    # Healthcare
+    "PFE",
+    "JNJ",
+    "MRNA",
+    # Industrials
+    "CAT",
+    "BA",
+    "GE",
+    # Consumer & retail
+    "WMT",
+    "HD",
+    "DIS",
+    # Volatile mid/small-cap plays
+    "PLTR",
+    "NIO",
+    "SNAP",
+    "CCL",
+    "AAL",
+    # Speculative/AI/quantum (keep for fun)
+    "RGTI",
+    "QUBT",
+    "QBTS",
+]
+
+
 def fetch_and_store_data(ticker, duration="2 M", bar_size="1 min"):
     contract = Stock(ticker, "SMART", "USD")
 
